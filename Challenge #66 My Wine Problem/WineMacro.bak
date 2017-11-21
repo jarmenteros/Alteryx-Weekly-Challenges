@@ -1,0 +1,641 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="11.3">
+  <Nodes>
+    <Node ToolID="2">
+      <GuiSettings Plugin="AlteryxGuiToolkit.Questions.Tab.Tab">
+        <Position x="0" y="0" width="59" height="59" />
+      </GuiSettings>
+      <Properties>
+        <Configuration />
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+    </Node>
+    <Node ToolID="3">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MacroInput.MacroInput">
+        <Position x="54" y="270" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UseFileInput value="False" />
+          <Name>Input</Name>
+          <Abbrev>I</Abbrev>
+          <ShowFieldMap value="True" />
+          <Optional value="False" />
+          <TextInput>
+            <Configuration>
+              <NumRows value="2" />
+              <Fields>
+                <Field name="OrderID" />
+                <Field name="StartBottleID" />
+                <Field name="EndBottleID" />
+              </Fields>
+              <Data>
+                <r>
+                  <c>1</c>
+                  <c>1</c>
+                  <c>12</c>
+                </r>
+                <r>
+                  <c>2</c>
+                  <c>1</c>
+                  <c>45</c>
+                </r>
+              </Data>
+            </Configuration>
+          </TextInput>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="True" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="OrderID" source="TextInput:" type="Byte" />
+            <Field name="StartBottleID" source="TextInput:" type="Byte" />
+            <Field name="EndBottleID" source="TextInput:" type="Byte" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMacroInput" />
+    </Node>
+    <Node ToolID="6">
+      <GuiSettings Plugin="AlteryxGuiToolkit.Questions.ControlParam.ControlParam">
+        <Position x="342" y="42" width="59" height="59" />
+      </GuiSettings>
+      <Properties>
+        <Configuration />
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+    </Node>
+    <Node ToolID="9">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="138" y="270" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="OrderID" selected="True" type="Int32" size="4" />
+            <SelectField field="StartBottleID" selected="True" type="Int32" size="4" />
+            <SelectField field="EndBottleID" selected="True" type="Int32" size="4" />
+            <SelectField field="*Unknown" selected="False" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="OrderID" source="TextInput:" type="Int32" />
+            <Field name="StartBottleID" source="TextInput:" type="Int32" />
+            <Field name="EndBottleID" source="TextInput:" type="Int32" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="11">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="222" y="270" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="IF ISNULL([StartBottleID]) THEN 1&#xA;ELSEIF [StartBottleID] &gt; [EndBottleID] THEN [EndBottleID]&#xA;ELSE [StartBottleID]&#xA;ENDIF" field="StartBottle ID" size="4" type="Int32" />
+            <FormulaField expression="IF ISNULL([EndBottleID]) AND ISNULL([StartBottleID]) THEN 1&#xA;ELSEIF ISNULL([EndBottleID]) AND !ISNULL(StartBottleID) THEN [StartBottleID]&#xA;ELSEIF [StartBottleID] &gt; [EndBottleID] THEN [StartBottleID]&#xA;ELSE [EndBottleID]&#xA;ENDIF" field="EndBottle ID" size="4" type="Int32" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>StartBottle ID = IF ISNULL([StartBottleID]) THEN 1
+ELSEIF [StartBottleID] &gt; [End...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="OrderID" source="TextInput:" type="Int32" />
+            <Field name="StartBottleID" source="TextInput:" type="Int32" />
+            <Field name="EndBottleID" source="TextInput:" type="Int32" />
+            <Field name="StartBottle ID" source="Formula: IF ISNULL([StartBottleID]) THEN 1&#xA;ELSEIF [StartBottleID] &gt; [EndBottleID] THEN [EndBottleID]&#xA;ELSE [StartBottleID]&#xA;ENDIF" type="Int32" />
+            <Field name="EndBottle ID" source="Formula: IF ISNULL([EndBottleID]) AND ISNULL([StartBottleID]) THEN 1&#xA;ELSEIF ISNULL([EndBottleID]) AND !ISNULL(StartBottleID) THEN [StartBottleID]&#xA;ELSEIF [StartBottleID] &gt; [EndBottleID] THEN [StartBottleID]&#xA;ELSE [EndBottleID]&#xA;ENDIF" type="Int32" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="12">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.GenerateRows.GenerateRows">
+        <Position x="318" y="270" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UpdateField value="False" />
+          <UpdateField_Name />
+          <CreateField_Name>LastBottleID</CreateField_Name>
+          <CreateField_Type>Int32</CreateField_Type>
+          <CreateField_Size>4</CreateField_Size>
+          <Expression_Init>IF [StartBottle ID] + CaseSize &lt; [EndBottle ID] THEN ([StartBottle ID] + CaseSize - 1) ELSE [EndBottle ID] ENDIF</Expression_Init>
+          <Expression_Cond>LastBottleID &lt;= [EndBottle ID]</Expression_Cond>
+          <Expression_Loop>LastBottleID + CaseSize</Expression_Loop>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="OrderID" source="TextInput:" type="Int32" />
+            <Field name="StartBottleID" source="TextInput:" type="Int32" />
+            <Field name="EndBottleID" source="TextInput:" type="Int32" />
+            <Field name="StartBottle ID" source="Formula: IF ISNULL([StartBottleID]) THEN 1&#xA;ELSEIF [StartBottleID] &gt; [EndBottleID] THEN [EndBottleID]&#xA;ELSE [StartBottleID]&#xA;ENDIF" type="Int32" />
+            <Field name="EndBottle ID" source="Formula: IF ISNULL([EndBottleID]) AND ISNULL([StartBottleID]) THEN 1&#xA;ELSEIF ISNULL([EndBottleID]) AND !ISNULL(StartBottleID) THEN [StartBottleID]&#xA;ELSEIF [StartBottleID] &gt; [EndBottleID] THEN [StartBottleID]&#xA;ELSE [EndBottleID]&#xA;ENDIF" type="Int32" />
+            <Field name="CaseSize" source="TextInput:" type="Byte" />
+            <Field name="LastBottleID" type="Int32" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxGenerateRows" />
+    </Node>
+    <Node ToolID="18">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MultiRowFormula.MultiRowFormula">
+        <Position x="414" y="270" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UpdateField value="True" />
+          <UpdateField_Name>StartBottleID</UpdateField_Name>
+          <CreateField_Name>NewField</CreateField_Name>
+          <CreateField_Type>Int32</CreateField_Type>
+          <CreateField_Size>4</CreateField_Size>
+          <OtherRows>NULL</OtherRows>
+          <NumRows value="1" />
+          <Expression>IF ISNULL([Row-1:LastBottleID]) OR ([OrderID] != [Row-1:OrderID] OR ISNULL([Row-1:OrderID])) THEN [StartBottle ID]
+ELSE [Row-1:LastBottleID] + 1
+ENDIF</Expression>
+          <GroupByFields />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>IF ISNULL([Row-1:LastBottleID]) OR ([OrderID] != [Row-1:Order...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="OrderID" source="TextInput:" type="Int32" />
+            <Field description="Formula: IF ISNULL([Row-1:LastBottleID]) OR ([OrderID] != [Row-1:OrderID] OR ISNULL([Row-1:OrderID])) THEN [StartBottle ID]&#xA;ELSE [Row-1:LastBottleID] + 1&#xA;ENDIF" name="StartBottleID" source="Formula: IF ISNULL([Row-1:LastBottleID]) OR ([OrderID] != [Row-1:OrderID] OR ISNULL([Row-1:OrderID])) THEN [StartBottle ID]&#xA;ELSE [Row-1:LastBottleID] + 1&#xA;ENDIF" type="Int32" />
+            <Field name="EndBottleID" source="TextInput:" type="Int32" />
+            <Field name="StartBottle ID" source="Formula: IF ISNULL([StartBottleID]) THEN 1&#xA;ELSEIF [StartBottleID] &gt; [EndBottleID] THEN [EndBottleID]&#xA;ELSE [StartBottleID]&#xA;ENDIF" type="Int32" />
+            <Field name="EndBottle ID" source="Formula: IF ISNULL([EndBottleID]) AND ISNULL([StartBottleID]) THEN 1&#xA;ELSEIF ISNULL([EndBottleID]) AND !ISNULL(StartBottleID) THEN [StartBottleID]&#xA;ELSEIF [StartBottleID] &gt; [EndBottleID] THEN [StartBottleID]&#xA;ELSE [EndBottleID]&#xA;ENDIF" type="Int32" />
+            <Field name="CaseSize" source="TextInput:" type="Byte" />
+            <Field name="LastBottleID" type="Int32" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMultiRowFormula" />
+    </Node>
+    <Node ToolID="20">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="798" y="258" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="OrderID" selected="True" />
+            <SelectField field="StartBottleID" selected="True" />
+            <SelectField field="EndBottleID" selected="True" />
+            <SelectField field="CaseSize" selected="True" />
+            <SelectField field="BottlesInThisBatch" selected="True" />
+            <SelectField field="BoxNumberForOrder" selected="True" />
+            <SelectField field="*Unknown" selected="False" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="OrderID" source="TextInput:" type="Int32" />
+            <Field description="Formula: IF ISNULL([Row-1:LastBottleID]) OR ([OrderID] != [Row-1:OrderID] OR ISNULL([Row-1:OrderID])) THEN [StartBottle ID]&#xA;ELSE [Row-1:LastBottleID] + 1&#xA;ENDIF" name="StartBottleID" source="Formula: IF ISNULL([Row-1:LastBottleID]) OR ([OrderID] != [Row-1:OrderID] OR ISNULL([Row-1:OrderID])) THEN [StartBottle ID]&#xA;ELSE [Row-1:LastBottleID] + 1&#xA;ENDIF" type="Int32" />
+            <Field description="Formula: IF [OrderID] != [Row-1:OrderID] OR ISNULL([Row-1:OrderID]) THEN [LastBottleID]&#xA;ELSEIF [LastBottleID] &lt; [EndBottle ID] THEN [LastBottleID]&#xA;ELSE [EndBottle ID]&#xA;ENDIF" name="EndBottleID" source="Formula: IF [OrderID] != [Row-1:OrderID] OR ISNULL([Row-1:OrderID]) THEN [LastBottleID]&#xA;ELSEIF [LastBottleID] &lt; [EndBottle ID] THEN [LastBottleID]&#xA;ELSE [EndBottle ID]&#xA;ENDIF" type="Int32" />
+            <Field name="CaseSize" source="TextInput:" type="Byte" />
+            <Field name="BottlesInThisBatch" source="Formula: [EndBottleID] - [StartBottleID] + 1" type="Int32" />
+            <Field description="Formula: IF [OrderID] != [Row-1:OrderID] OR ISNULL([Row-1:OrderID]) THEN 1&#xA;ELSE [Row-1:BoxNumberForOrder]+1&#xA;ENDIF" name="BoxNumberForOrder" source="Formula: IF [OrderID] != [Row-1:OrderID] OR ISNULL([Row-1:OrderID]) THEN 1&#xA;ELSE [Row-1:BoxNumberForOrder]+1&#xA;ENDIF" type="Int32" />
+          </RecordInfo>
+          <SortInfo>
+            <Field field="EndBottleID" order="Asc" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="21">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MacroOutput.MacroOutput">
+        <Position x="882" y="258" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Name>Output</Name>
+          <Abbrev>R</Abbrev>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMacroOutput" />
+    </Node>
+    <Node ToolID="23">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MultiRowFormula.MultiRowFormula">
+        <Position x="678" y="270" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UpdateField value="False" />
+          <UpdateField_Name>OrderID</UpdateField_Name>
+          <CreateField_Name>BoxNumberForOrder</CreateField_Name>
+          <CreateField_Type>Int32</CreateField_Type>
+          <CreateField_Size>4</CreateField_Size>
+          <OtherRows>NULL</OtherRows>
+          <NumRows value="1" />
+          <Expression>IF [OrderID] != [Row-1:OrderID] OR ISNULL([Row-1:OrderID]) THEN 1
+ELSE [Row-1:BoxNumberForOrder]+1
+ENDIF</Expression>
+          <GroupByFields />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>IF [OrderID] != [Row-1:OrderID] OR ISNULL([Row-1:OrderID]) TH...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="OrderID" source="TextInput:" type="Int32" />
+            <Field description="Formula: IF ISNULL([Row-1:LastBottleID]) OR ([OrderID] != [Row-1:OrderID] OR ISNULL([Row-1:OrderID])) THEN [StartBottle ID]&#xA;ELSE [Row-1:LastBottleID] + 1&#xA;ENDIF" name="StartBottleID" source="Formula: IF ISNULL([Row-1:LastBottleID]) OR ([OrderID] != [Row-1:OrderID] OR ISNULL([Row-1:OrderID])) THEN [StartBottle ID]&#xA;ELSE [Row-1:LastBottleID] + 1&#xA;ENDIF" type="Int32" />
+            <Field description="Formula: IF [OrderID] != [Row-1:OrderID] OR ISNULL([Row-1:OrderID]) THEN [LastBottleID]&#xA;ELSEIF [LastBottleID] &lt; [EndBottle ID] THEN [LastBottleID]&#xA;ELSE [EndBottle ID]&#xA;ENDIF" name="EndBottleID" source="Formula: IF [OrderID] != [Row-1:OrderID] OR ISNULL([Row-1:OrderID]) THEN [LastBottleID]&#xA;ELSEIF [LastBottleID] &lt; [EndBottle ID] THEN [LastBottleID]&#xA;ELSE [EndBottle ID]&#xA;ENDIF" type="Int32" />
+            <Field name="StartBottle ID" source="Formula: IF ISNULL([StartBottleID]) THEN 1&#xA;ELSEIF [StartBottleID] &gt; [EndBottleID] THEN [EndBottleID]&#xA;ELSE [StartBottleID]&#xA;ENDIF" type="Int32" />
+            <Field name="EndBottle ID" source="Formula: IF ISNULL([EndBottleID]) AND ISNULL([StartBottleID]) THEN 1&#xA;ELSEIF ISNULL([EndBottleID]) AND !ISNULL(StartBottleID) THEN [StartBottleID]&#xA;ELSEIF [StartBottleID] &gt; [EndBottleID] THEN [StartBottleID]&#xA;ELSE [EndBottleID]&#xA;ENDIF" type="Int32" />
+            <Field name="CaseSize" source="TextInput:" type="Byte" />
+            <Field name="LastBottleID" type="Int32" />
+            <Field name="BottlesInThisBatch" source="Formula: [EndBottleID] - [StartBottleID] + 1" type="Int32" />
+            <Field description="Formula: IF [OrderID] != [Row-1:OrderID] OR ISNULL([Row-1:OrderID]) THEN 1&#xA;ELSE [Row-1:BoxNumberForOrder]+1&#xA;ENDIF" name="BoxNumberForOrder" source="Formula: IF [OrderID] != [Row-1:OrderID] OR ISNULL([Row-1:OrderID]) THEN 1&#xA;ELSE [Row-1:BoxNumberForOrder]+1&#xA;ENDIF" type="Int32" />
+          </RecordInfo>
+          <SortInfo>
+            <Field field="EndBottleID" order="Asc" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMultiRowFormula" />
+    </Node>
+    <Node ToolID="27">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MultiRowFormula.MultiRowFormula">
+        <Position x="510" y="270" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UpdateField value="True" />
+          <UpdateField_Name>EndBottleID</UpdateField_Name>
+          <CreateField_Name>NewField</CreateField_Name>
+          <CreateField_Type>Int32</CreateField_Type>
+          <CreateField_Size>4</CreateField_Size>
+          <OtherRows>Empty</OtherRows>
+          <NumRows value="1" />
+          <Expression>IF [OrderID] != [Row-1:OrderID] OR ISNULL([Row-1:OrderID]) THEN [LastBottleID]
+ELSEIF [LastBottleID] &lt; [EndBottle ID] THEN [LastBottleID]
+ELSE [EndBottle ID]
+ENDIF</Expression>
+          <GroupByFields>
+            <Field field="EndBottleID" />
+          </GroupByFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>IF [OrderID] != [Row-1:OrderID] OR ISNULL([Row-1:OrderID]) TH...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="OrderID" source="TextInput:" type="Int32" />
+            <Field description="Formula: IF ISNULL([Row-1:LastBottleID]) OR ([OrderID] != [Row-1:OrderID] OR ISNULL([Row-1:OrderID])) THEN [StartBottle ID]&#xA;ELSE [Row-1:LastBottleID] + 1&#xA;ENDIF" name="StartBottleID" source="Formula: IF ISNULL([Row-1:LastBottleID]) OR ([OrderID] != [Row-1:OrderID] OR ISNULL([Row-1:OrderID])) THEN [StartBottle ID]&#xA;ELSE [Row-1:LastBottleID] + 1&#xA;ENDIF" type="Int32" />
+            <Field description="Formula: IF [OrderID] != [Row-1:OrderID] OR ISNULL([Row-1:OrderID]) THEN [LastBottleID]&#xA;ELSEIF [LastBottleID] &lt; [EndBottle ID] THEN [LastBottleID]&#xA;ELSE [EndBottle ID]&#xA;ENDIF" name="EndBottleID" source="Formula: IF [OrderID] != [Row-1:OrderID] OR ISNULL([Row-1:OrderID]) THEN [LastBottleID]&#xA;ELSEIF [LastBottleID] &lt; [EndBottle ID] THEN [LastBottleID]&#xA;ELSE [EndBottle ID]&#xA;ENDIF" type="Int32" />
+            <Field name="StartBottle ID" source="Formula: IF ISNULL([StartBottleID]) THEN 1&#xA;ELSEIF [StartBottleID] &gt; [EndBottleID] THEN [EndBottleID]&#xA;ELSE [StartBottleID]&#xA;ENDIF" type="Int32" />
+            <Field name="EndBottle ID" source="Formula: IF ISNULL([EndBottleID]) AND ISNULL([StartBottleID]) THEN 1&#xA;ELSEIF ISNULL([EndBottleID]) AND !ISNULL(StartBottleID) THEN [StartBottleID]&#xA;ELSEIF [StartBottleID] &gt; [EndBottleID] THEN [StartBottleID]&#xA;ELSE [EndBottleID]&#xA;ENDIF" type="Int32" />
+            <Field name="CaseSize" source="TextInput:" type="Byte" />
+            <Field name="LastBottleID" type="Int32" />
+          </RecordInfo>
+          <SortInfo>
+            <Field field="EndBottleID" order="Asc" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMultiRowFormula" />
+    </Node>
+    <Node ToolID="28">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="594" y="270" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="[EndBottleID] - [StartBottleID] + 1" field="BottlesInThisBatch" size="4" type="Int32" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText><![CDATA[BottlesInThisBatch = [EndBottleID] - [StartBottleID] + 1
+]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="OrderID" source="TextInput:" type="Int32" />
+            <Field description="Formula: IF ISNULL([Row-1:LastBottleID]) OR ([OrderID] != [Row-1:OrderID] OR ISNULL([Row-1:OrderID])) THEN [StartBottle ID]&#xA;ELSE [Row-1:LastBottleID] + 1&#xA;ENDIF" name="StartBottleID" source="Formula: IF ISNULL([Row-1:LastBottleID]) OR ([OrderID] != [Row-1:OrderID] OR ISNULL([Row-1:OrderID])) THEN [StartBottle ID]&#xA;ELSE [Row-1:LastBottleID] + 1&#xA;ENDIF" type="Int32" />
+            <Field description="Formula: IF [OrderID] != [Row-1:OrderID] OR ISNULL([Row-1:OrderID]) THEN [LastBottleID]&#xA;ELSEIF [LastBottleID] &lt; [EndBottle ID] THEN [LastBottleID]&#xA;ELSE [EndBottle ID]&#xA;ENDIF" name="EndBottleID" source="Formula: IF [OrderID] != [Row-1:OrderID] OR ISNULL([Row-1:OrderID]) THEN [LastBottleID]&#xA;ELSEIF [LastBottleID] &lt; [EndBottle ID] THEN [LastBottleID]&#xA;ELSE [EndBottle ID]&#xA;ENDIF" type="Int32" />
+            <Field name="StartBottle ID" source="Formula: IF ISNULL([StartBottleID]) THEN 1&#xA;ELSEIF [StartBottleID] &gt; [EndBottleID] THEN [EndBottleID]&#xA;ELSE [StartBottleID]&#xA;ENDIF" type="Int32" />
+            <Field name="EndBottle ID" source="Formula: IF ISNULL([EndBottleID]) AND ISNULL([StartBottleID]) THEN 1&#xA;ELSEIF ISNULL([EndBottleID]) AND !ISNULL(StartBottleID) THEN [StartBottleID]&#xA;ELSEIF [StartBottleID] &gt; [EndBottleID] THEN [StartBottleID]&#xA;ELSE [EndBottleID]&#xA;ENDIF" type="Int32" />
+            <Field name="CaseSize" source="TextInput:" type="Byte" />
+            <Field name="LastBottleID" type="Int32" />
+            <Field name="BottlesInThisBatch" source="Formula: [EndBottleID] - [StartBottleID] + 1" type="Int32" />
+          </RecordInfo>
+          <SortInfo>
+            <Field field="EndBottleID" order="Asc" />
+          </SortInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="29">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.TextInput.TextInput">
+        <Position x="126" y="162" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <NumRows value="1" />
+          <Fields>
+            <Field name="CaseSize" />
+          </Fields>
+          <Data>
+            <r>
+              <c>6</c>
+            </r>
+          </Data>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="CaseSize" source="TextInput:" type="Byte" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextInput" />
+    </Node>
+    <Node ToolID="30">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AppendFields.AppendFields">
+        <Position x="258" y="186" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <CartesianMode>Error</CartesianMode>
+          <SelectConfiguration>
+            <Configuration outputConnection="Output">
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+          </SelectConfiguration>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="OrderID" source="TextInput:" type="Int32" />
+            <Field name="StartBottleID" source="TextInput:" type="Int32" />
+            <Field name="EndBottleID" source="TextInput:" type="Int32" />
+            <Field name="StartBottle ID" source="Formula: IF ISNULL([StartBottleID]) THEN 1&#xA;ELSEIF [StartBottleID] &gt; [EndBottleID] THEN [EndBottleID]&#xA;ELSE [StartBottleID]&#xA;ENDIF" type="Int32" />
+            <Field name="EndBottle ID" source="Formula: IF ISNULL([EndBottleID]) AND ISNULL([StartBottleID]) THEN 1&#xA;ELSEIF ISNULL([EndBottleID]) AND !ISNULL(StartBottleID) THEN [StartBottleID]&#xA;ELSEIF [StartBottleID] &gt; [EndBottleID] THEN [StartBottleID]&#xA;ELSE [EndBottleID]&#xA;ENDIF" type="Int32" />
+            <Field name="CaseSize" source="TextInput:" type="Byte" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxAppendFields" />
+    </Node>
+    <Node ToolID="31">
+      <GuiSettings Plugin="AlteryxGuiToolkit.Action.Action">
+        <Position x="234" y="102" width="59" height="59" />
+      </GuiSettings>
+      <Properties>
+        <Configuration />
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="3" Connection="Output" />
+      <Destination ToolID="9" Connection="Input" />
+    </Connection>
+    <Connection name="#1">
+      <Origin ToolID="6" Connection="Question" />
+      <Destination ToolID="31" Connection="Question" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="9" Connection="Output" />
+      <Destination ToolID="11" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="11" Connection="Output" />
+      <Destination ToolID="30" Connection="Targets" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="29" Connection="Output" />
+      <Destination ToolID="30" Connection="Source" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="12" Connection="Output" />
+      <Destination ToolID="18" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="18" Connection="Output" />
+      <Destination ToolID="27" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="20" Connection="Output" />
+      <Destination ToolID="21" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="23" Connection="Output" />
+      <Destination ToolID="20" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="27" Connection="Output" />
+      <Destination ToolID="28" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="28" Connection="Output" />
+      <Destination ToolID="23" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="30" Connection="Output" />
+      <Destination ToolID="12" Connection="Input" />
+    </Connection>
+    <Connection name="#2">
+      <Origin ToolID="31" Connection="Action" />
+      <Destination ToolID="29" Connection="Action" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <Constants>
+      <Constant>
+        <Namespace>Question</Namespace>
+        <Name>ControlParam.Control Parameter (6)</Name>
+        <Value />
+        <IsNumeric value="False" />
+      </Constant>
+      <Constant>
+        <Namespace>Question</Namespace>
+        <Name>Macro Output (21)</Name>
+        <Value />
+        <IsNumeric value="False" />
+      </Constant>
+    </Constants>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>WineMacro</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+    </MetaInfo>
+    <Events>
+      <Enabled value="False" />
+    </Events>
+    <RuntimeProperties>
+      <Actions>
+        <NoCondition>
+          <Type>NoCondition</Type>
+          <Description>(Always Run)</Description>
+          <True>
+            <Action>
+              <Type>UpdateValue</Type>
+              <Description />
+              <ToolId value="31" />
+              <Mode>Simple</Mode>
+              <Variable />
+              <Replace value="True" />
+              <ReplaceText>6</ReplaceText>
+              <Destination>29/Data/r/c</Destination>
+            </Action>
+          </True>
+        </NoCondition>
+      </Actions>
+      <Questions>
+        <Question>
+          <Type>Tab</Type>
+          <Description>Questions</Description>
+          <Name>Tab (2)</Name>
+          <ToolId value="2" />
+          <Questions>
+            <Question>
+              <Type>MacroInput</Type>
+              <Description>Macro Input (3)</Description>
+              <Name>Macro Input (3)</Name>
+              <ToolId value="3" />
+            </Question>
+            <Question>
+              <Type>ControlParam</Type>
+              <Description>Case Size</Description>
+              <Name>Control Parameter (6)</Name>
+              <ToolId value="6" />
+            </Question>
+            <Question>
+              <Type>MacroOutput</Type>
+              <Description>Macro Output (21)</Description>
+              <Name>Macro Output (21)</Name>
+              <ToolId value="21" />
+            </Question>
+          </Questions>
+        </Question>
+      </Questions>
+      <ModuleType>Macro</ModuleType>
+      <MacroCustomHelp value="False" />
+      <MacroDynamicOutputFields value="False" />
+      <MacroImageStd value="39" />
+      <MacroInputs />
+      <MacroOutputs />
+      <BatchMacro>
+        <OutputMode>AllSame</OutputMode>
+        <ControlParams>
+          <ControlParam>
+            <Name>Control Parameter (6)</Name>
+            <Description>Case Size</Description>
+          </ControlParam>
+        </ControlParams>
+      </BatchMacro>
+      <Wiz_CustomHelp value="False" />
+      <Wiz_CustomGraphic value="False" />
+      <Wiz_ShowOutput value="True" />
+      <Wiz_OpenOutputTools>
+        <Tool ToolId="3" Selected="True" />
+        <Tool ToolId="21" Selected="True" />
+      </Wiz_OpenOutputTools>
+      <Wiz_OutputMessage />
+      <Wiz_NoOutputFilesMessage />
+      <Wiz_ChainRunWizard />
+    </RuntimeProperties>
+  </Properties>
+</AlteryxDocument>

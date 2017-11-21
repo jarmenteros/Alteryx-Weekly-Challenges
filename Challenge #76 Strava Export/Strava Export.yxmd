@@ -1,0 +1,739 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="11.3">
+  <Nodes>
+    <Node ToolID="1">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+        <Position x="114" y="90" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Passwords />
+          <File OutputFileName="" RecordLimit="" SearchSubDirs="False" FileFormat="21">C:\Users\jose.armenteros\Documents\Alteryx Weekly Challenges\Challenge #76 Strava Export\White_ranch.txt</File>
+          <FormatSpecificOptions>
+            <TrimWhiteSpace>Unset</TrimWhiteSpace>
+            <LineEndStyle>Unset</LineEndStyle>
+            <AllowLongLines>Unset</AllowLongLines>
+            <CodePage>28591</CodePage>
+            <AllowShortLines>Unset</AllowShortLines>
+            <FlatFileXML>
+              <flatfile version="1">
+                <file eoltype="lf" allowShortLines="t" allowLongLines="f" trimWhiteSpace="t" />
+                <fields>
+                  <field name="Field_1" type="V_String" length="895" />
+                </fields>
+              </flatfile>
+            </FlatFileXML>
+          </FormatSpecificOptions>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>White_ranch.txt</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+        <Dependencies>
+          <Implicit />
+        </Dependencies>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Field_1" size="895" source="File: C:\Users\jose.armenteros\Documents\Alteryx Weekly Challenges\Challenge #76 Strava Export\White_ranch.txt" type="V_String" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+    </Node>
+    <Node ToolID="4">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MultiRowFormula.MultiRowFormula">
+        <Position x="246" y="90" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UpdateField value="False" />
+          <UpdateField_Name>Field_1</UpdateField_Name>
+          <CreateField_Name>Track Event No.</CreateField_Name>
+          <CreateField_Type>Int32</CreateField_Type>
+          <CreateField_Size>4</CreateField_Size>
+          <OtherRows>Empty</OtherRows>
+          <NumRows value="1" />
+          <Expression><![CDATA[IF CONTAINS([Field_1],"<trkpt") 
+   THEN [Row-1:Track Event No.]+1
+ELSE	 [Row-1:Track Event No.]
+ENDIF
+
+]]></Expression>
+          <GroupByFields />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>IF CONTAINS([Field_1],"&lt;trkpt") 
+   THEN [Row-1:Track Event N...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMultiRowFormula" />
+    </Node>
+    <Node ToolID="5">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="354" y="90" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Mode>Simple</Mode>
+          <Simple>
+            <Field>Field_1</Field>
+            <Operator>Contains</Operator>
+            <Operands>
+              <Operand>time</Operand>
+            </Operands>
+          </Simple>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Contains([Field_1],"time")</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+    <Node ToolID="7">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="462" y="210" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Mode>Simple</Mode>
+          <Simple>
+            <Field>Field_1</Field>
+            <Operator>Contains</Operator>
+            <Operands>
+              <Operand>&lt;trkpt</Operand>
+            </Operands>
+          </Simple>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Contains([Field_1],"&lt;trkpt")</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+    <Node ToolID="8">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+        <Position x="594" y="330" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Mode>Simple</Mode>
+          <Simple>
+            <Field>Field_1</Field>
+            <Operator>Contains</Operator>
+            <Operands>
+              <Operand>&lt;ele</Operand>
+            </Operands>
+          </Simple>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Contains([Field_1],"&lt;ele")</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+    </Node>
+    <Node ToolID="10">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="582" y="78" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="REPLACE(REPLACE(Field_1,&quot;&lt;time&gt;&quot;,&quot;&quot;),&quot;&lt;/time&gt;&quot;,&quot;&quot;)" field="Field_1" size="895" type="V_String" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText><![CDATA[Field_1 = REPLACE(REPLACE(Field_1,"<time>",""),"</time>","")
+]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="11">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Join.Join">
+        <Position x="726" y="90" />
+      </GuiSettings>
+      <Properties>
+        <Configuration joinByRecordPos="False">
+          <JoinInfo connection="Left">
+            <Field field="Track Event No." />
+          </JoinInfo>
+          <JoinInfo connection="Right">
+            <Field field="Track Event No." />
+          </JoinInfo>
+          <SelectConfiguration>
+            <Configuration outputConnection="Join">
+              <OrderChanged value="True" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Left_Track Event No." selected="True" />
+                <SelectField field="Left_Field_1" selected="True" rename="Time" />
+                <SelectField field="Right_Field_1" selected="False" rename="Right_Field_1" />
+                <SelectField field="Right_Track Event No." selected="False" rename="Right_Track Event No." />
+                <SelectField field="Right_Field_11" selected="False" />
+                <SelectField field="Right_Field_12" selected="True" rename="Latitude" />
+                <SelectField field="Right_Field_13" selected="False" />
+                <SelectField field="Right_Field_14" selected="True" rename="Longitude" />
+                <SelectField field="Right_Field_15" selected="False" />
+                <SelectField field="*Unknown" selected="False" />
+              </SelectFields>
+            </Configuration>
+          </SelectConfiguration>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJoin" />
+    </Node>
+    <Node ToolID="12">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.TextToColumns.TextToColumns">
+        <Position x="594" y="198" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Field>Field_1</Field>
+          <NumFields value="5" />
+          <ErrorHandling>Last</ErrorHandling>
+          <RootName>Field_1</RootName>
+          <Delimeters value="&quot;" />
+          <Flags value="0" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextToColumns" />
+    </Node>
+    <Node ToolID="13">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Join.Join">
+        <Position x="834" y="210" />
+      </GuiSettings>
+      <Properties>
+        <Configuration joinByRecordPos="False">
+          <JoinInfo connection="Left">
+            <Field field="Track Event No." />
+          </JoinInfo>
+          <JoinInfo connection="Right">
+            <Field field="Track Event No." />
+          </JoinInfo>
+          <SelectConfiguration>
+            <Configuration outputConnection="Join">
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Right_Field_1" selected="True" rename="Elevation" />
+                <SelectField field="Right_Track Event No." selected="False" rename="Right_Track Event No." />
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+          </SelectConfiguration>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJoin" />
+    </Node>
+    <Node ToolID="14">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="726" y="318" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="REPLACE(REPLACE(Field_1,&quot;&lt;ele&gt;&quot;,&quot;&quot;),&quot;&lt;/ele&gt;&quot;,&quot;&quot;)&#xA;" field="Field_1" size="895" type="V_String" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText><![CDATA[Field_1 = REPLACE(REPLACE(Field_1,"<ele>",""),"</ele>","")
+
+]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="17">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="930" y="210" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="REPLACE(REPLACE([Time],&quot;Z&quot;,&quot;&quot;),&quot;T&quot;,&quot; &quot;)" field="Time" size="895" type="V_String" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText><![CDATA[Time = REPLACE(REPLACE([Time],"Z",""),"T"," ")
+]]></DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="18">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="1026" y="210" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="Time" selected="True" type="DateTime" size="19" />
+            <SelectField field="Latitude" selected="True" type="Double" size="8" />
+            <SelectField field="Longitude" selected="True" type="Double" size="8" />
+            <SelectField field="Elevation" selected="True" type="Double" size="8" />
+            <SelectField field="*Unknown" selected="True" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="20">
+      <GuiSettings Plugin="AlteryxSpatialPluginsGui.CreatePoints.CreatePoints">
+        <Position x="1122" y="162" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Fields fieldX="Longitude" fieldY="Latitude" />
+          <Mode>Double</Mode>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxCreatePoints" />
+    </Node>
+    <Node ToolID="23">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MultiRowFormula.MultiRowFormula">
+        <Position x="1206" y="162" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UpdateField value="False" />
+          <UpdateField_Name>Track Event No.</UpdateField_Name>
+          <CreateField_Name>Previous Point</CreateField_Name>
+          <CreateField_Type>SpatialObj</CreateField_Type>
+          <CreateField_Size>536870911</CreateField_Size>
+          <OtherRows>Nearest</OtherRows>
+          <NumRows value="1" />
+          <Expression>IF [Track Event No.] = 1 THEN [Centroid]
+ELSE				   [Row-1:Centroid]
+ENDIF</Expression>
+          <GroupByFields />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>IF [Track Event No.] = 1 THEN [Centroid]
+ELSE				   [Row-1:Ce...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMultiRowFormula" />
+    </Node>
+    <Node ToolID="24">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MultiRowFormula.MultiRowFormula">
+        <Position x="1290" y="162" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UpdateField value="False" />
+          <UpdateField_Name>Track Event No.</UpdateField_Name>
+          <CreateField_Name>Previous Time</CreateField_Name>
+          <CreateField_Type>DateTime</CreateField_Type>
+          <CreateField_Size>19</CreateField_Size>
+          <OtherRows>Empty</OtherRows>
+          <NumRows value="1" />
+          <Expression>[Row-1:Time]</Expression>
+          <GroupByFields />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>[Row-1:Time]</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMultiRowFormula" />
+    </Node>
+    <Node ToolID="25">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+        <Position x="1386" y="162" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <FormulaFields>
+            <FormulaField expression="IF [Track Event No.] = 1 THEN 0&#xA;ELSE						  ABS(ST_DISTANCE([Previous Point],[Centroid],&quot;Mi&quot;))/DateTimeDiff([Time],[Previous Time],&quot;Seconds&quot;)*3600&#xA;ENDIF" field="Velocity" size="8" type="Double" />
+            <FormulaField expression="[Elevation]*3.28084" field="Elevation" size="8" type="Double" />
+          </FormulaFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText>Velocity = IF [Track Event No.] = 1 THEN 0
+ELSE						  ABS(ST_DISTANCE([Previous...</DefaultAnnotationText>
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+    </Node>
+    <Node ToolID="28">
+      <GuiSettings Plugin="AlteryxReportChartGui.AlteryxReportChartGui">
+        <Position x="1506" y="162" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <ChartType>Line</ChartType>
+          <GroupingFields orderChanged="False" />
+          <LabelField />
+          <GeneralStyles ThreeDInterior="false" GradientColoring="false" ChartSizeW="432" ChartSizeH="288" Resolution="2x (192 dpi)" ChartTitle="" ChartTitleSize="14" ChartSubTitle="" ChartSubTitleSize="12" ChartPrimaryFont="Microsoft Sans Serif" />
+          <TitleStyles ChangeTitleFont="false" ChartTitleFont="Microsoft Sans Serif" ChartTitleSize="14" ChartTitleColor="#000000" ChartTitleAlignment="Center" ChangeSubTitleFont="false" ChartSubTitleFont="Microsoft Sans Serif" ChartSubTitleSize="12" ChartSubTitleColor="#000000" SubTitleAlignment="Center" ChangeLegendTextFont="false" LegendTextFont="Microsoft Sans Serif" LegendTextSize="12" LegendTextColor="#000000" />
+          <Styles UseChartBorder="false" ChartBorderWidth="2" ChartBorderColor="#000000" UseAreaBorder="false" AreaBorderWidth="2" AreaBorderColor="#000000" ChartBGColor="#ffffff" ChartAreaBGColor="#ffffff" ChartInteriorBGColor="#c0c0c0" />
+          <ChartTypeStyles ShowChartLegend="false" LegendSeparateImage="false" LegendPosition="Top" LegendAlignment="Center" UseLegendBorder="false" LegendBorderWidth="2" LegendBorderColor="#000000" TransposeData="Record" ShowDataPointText="false" DataPointFontFaceName="Microsoft Sans Serif" DataPointFontSize="8" DataPointTextColor="#000000" DataPointTextOffset="2" DataPointUsePrePostfix="false" DataPointOverrideDecimalPlaces="false" DataPointNumDecimalPlaces="0" SeriesPalette="#b30023,#00488c,#1e6c0b,#d84000,#f0b400,#332600,#5400a8,#434c43" SeriesBorderWidth="2" ShowSeriesDots="true" SeriesDotSize="6" />
+          <YAxis YAxisLabelFont="Microsoft Sans Serif" YAxisLabelSize="8" YAxisLabelColor="#000000" YAxisTitle="Speed (MPH)" YAxisTitleFont="Microsoft Sans Serif" YAxisTitleSize="10" YAxisTitleColor="#000000" YAxisShowGrid="false" YPrefix="" YPostfix="" YAxisOverrideIncrement="false" YAxisIncrement="100" YAxisOverrideBaseline="false" YAxisBaseline="0" YAxisOverrideTopline="false" YAxisTopline="1000" UseYAxisHiliteline="false" YAxisHiliteValue="0" YAxisHiliteColor="#000000" YAxisOverrideDecimalPlaces="false" YAxisNumDecimalPlaces="0" />
+          <OAxis UseOpposedAxis="true" OAxisLabelFont="Microsoft Sans Serif" OAxisLabelSize="8" OAxisLabelColor="#000000" OAxisTitle="Elevation (Feet)" OAxisTitleFont="Microsoft Sans Serif" OAxisTitleSize="10" OAxisTitleColor="#000000" OAxisShowGrid="true" OPrefix="" OPostfix="" OAxisOverrideOrigin="false" OAxisCustomOrigin="0" OAxisOverrideIncrement="false" OAxisIncrement="100" OAxisOverrideBaseline="false" OAxisBaseline="0" OAxisOverrideTopline="false" OAxisTopline="1000" UseOAxisHiliteline="false" OAxisHiliteValue="0" OAxisHiliteColor="#000000" OAxisOverrideDecimalPlaces="false" OAxisNumDecimalPlaces="0" />
+          <XAxis XAxisLabelFont="Microsoft Sans Serif" XAxisLabelSize="1" XAxisLabelColor="#008080" XAxisTitle="Time" XAxisTitleFont="Microsoft Sans Serif" XAxisTitleSize="10" XAxisTitleColor="#000000" XAxisShowGrid="false" />
+          <StylesSeries1 ShowDataPointText="false" DataPointFontFaceName="Microsoft Sans Serif" DataPointFontSize="8" DataPointTextColor="#000000" DataPointTextOffset="2" DataPointUsePrePostfix="false" DataPointOverrideDecimalPlaces="false" DataPointNumDecimalPlaces="0" SeriesColor="#008080" SeriesPalette="#b30023,#00488c,#1e6c0b,#d84000,#f0b400,#332600,#5400a8,#434c43" SeriesBorderWidth="2" ShowSeriesDots="false" SeriesDotSize="6" PlotOnOpposedAxis="false" />
+          <StylesSeries2 ShowDataPointText="false" DataPointFontFaceName="Microsoft Sans Serif" DataPointFontSize="8" DataPointTextColor="#000000" DataPointTextOffset="2" DataPointUsePrePostfix="false" DataPointOverrideDecimalPlaces="false" DataPointNumDecimalPlaces="0" SeriesColor="#00488c" SeriesPalette="#b30023,#00488c,#1e6c0b,#d84000,#f0b400,#332600,#5400a8,#434c43" SeriesBorderWidth="2" ShowSeriesDots="false" SeriesDotSize="6" PlotOnOpposedAxis="true" />
+          <StylesSeries3 ShowDataPointText="false" DataPointFontFaceName="Microsoft Sans Serif" DataPointFontSize="8" DataPointTextColor="#000000" DataPointTextOffset="2" DataPointUsePrePostfix="false" DataPointOverrideDecimalPlaces="false" DataPointNumDecimalPlaces="0" SeriesColor="#1e6c0b" SeriesPalette="#b30023,#00488c,#1e6c0b,#d84000,#f0b400,#332600,#5400a8,#434c43" SeriesBorderWidth="2" ShowSeriesDots="true" SeriesDotSize="6" PlotOnOpposedAxis="false" />
+          <WatermarkStyles UseWatermark="None" WatermarkText="Property of Alteryx, Inc." WatermarkTextFont="Microsoft Sans Serif" WatermarkTextSize="14" WatermarkTextColor="#000000" WatermarkOpacity="60" WatermarkImage="" />
+          <AllowMultiple value="true" />
+          <CombinationChart value="false" />
+          <SeriesList numSeries="3">
+            <Series1>
+              <Y_ValueField yValueName="LineValue" yValueDesc="Line">Velocity</Y_ValueField>
+            </Series1>
+            <Series2>
+              <Y_ValueField yValueName="LineValue" yValueDesc="Line">Elevation</Y_ValueField>
+            </Series2>
+            <Series3>
+              <Y_ValueField yValueName="LineValue" yValueDesc="Line">[None]</Y_ValueField>
+            </Series3>
+          </SeriesList>
+          <CurrentKnownFields>
+            <Field name="Track Event No." />
+            <Field name="Latitude" />
+            <Field name="Longitude" />
+            <Field name="Elevation" />
+            <Field name="Velocity" />
+          </CurrentKnownFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxReportChart.dll" EngineDllEntryPoint="AlteryxReportChartPlugin" />
+    </Node>
+    <Node ToolID="29">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
+        <Position x="1614" y="162" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <TempFile>C:\Users\JOSE~1.ARM\AppData\Local\Temp\Engine_13592_d9820ee0b60a4686aa86da556ac00e22_\Engine_12924_efba5345a5f9450f90ca833ff0246ff9_.yxdb</TempFile>
+          <TempFileDataProfiling />
+          <Layout>
+            <ViewMode>Single</ViewMode>
+            <ViewSize value="100" />
+            <View1>
+              <DefaultTab>Report</DefaultTab>
+              <Hints>
+                <Table />
+              </Hints>
+            </View1>
+            <View2 />
+          </Layout>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxBrowseV2" />
+    </Node>
+    <Node ToolID="30">
+      <GuiSettings Plugin="AlteryxSpatialPluginsGui.ReportMap.ReportMap">
+        <Position x="1506" y="330" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <TemporaryFileLocationXML>C:\Users\JOSE~1.ARM\AppData\Local\Temp\Engine_13592_d9820ee0b60a4686aa86da556ac00e22_\Engine_12924_8cf4aceae5f94b068eb16a579c9048de_.xml</TemporaryFileLocationXML>
+          <IsMetric value="False" />
+          <ImageWidth>8</ImageWidth>
+          <ImageHeight>6</ImageHeight>
+          <ImageResolution>1</ImageResolution>
+          <ReferenceMap>Latest:CloudMade</ReferenceMap>
+          <BackgroundColor>#000000</BackgroundColor>
+          <DropShadow>Map</DropShadow>
+          <ScaleUnits>Miles</ScaleUnits>
+          <ExpandExtent>10</ExpandExtent>
+          <MinimumWidth>0.5</MinimumWidth>
+          <DataConnections>
+            <DataConnection name="#1">
+              <ConnectionType>IncomingConnection</ConnectionType>
+              <Connection>#1</Connection>
+              <FileName />
+              <SpatialObj>Centroid</SpatialObj>
+              <GroupField />
+              <ThemeField />
+              <LabelField />
+            </DataConnection>
+          </DataConnections>
+          <Layers>
+            <Layer name="Base Layers - Lines" order="2">
+              <DisplayName>Base Layers - Lines</DisplayName>
+              <DataConnection />
+              <LayerType>Placeholder</LayerType>
+              <ShowLabel value="False" />
+            </Layer>
+            <Layer name="Base Layers - Points" order="1">
+              <DisplayName>Base Layers - Points</DisplayName>
+              <DataConnection />
+              <LayerType>Placeholder</LayerType>
+              <ShowLabel value="False" />
+            </Layer>
+            <Layer name="Base Layers - Polygons" order="3">
+              <DisplayName>Base Layers - Polygons</DisplayName>
+              <DataConnection />
+              <LayerType>Placeholder</LayerType>
+              <ShowLabel value="False" />
+            </Layer>
+            <Layer name="1" order="0">
+              <LayerType>Lines</LayerType>
+              <isBaseLayer value="False" />
+              <isReorderedBaseLayer value="False" />
+              <isRestlyedBaseLayer value="False" />
+              <baseLabelOverriden value="False" />
+              <isThemeLayer value="False" />
+              <DisplayName>A map of the route</DisplayName>
+              <DataConnection>#1</DataConnection>
+              <ShowInLegend value="False" />
+              <ZoomToLayer value="False" />
+              <Disable value="False" />
+              <LineStyle Color="#ff8040" Size="4" UseOverlay="true" OverlayColor="#ff8040" OverlaySize="2" Opacity="100" />
+              <ThemeStyle TileMethod="SmartTile" NumTiles="5" ColorMethod="Ramp" StartColor="#0000ff" EndColor="#ff0000" UniqueColors="#dc143c,#6495ed,#f0e68c,#228b22,#a9a9a9,#ffa500,#ba55d3,#a0522d,#ff69b4,#4b0082,#d3d3d3,#9acd32,#00ffff,#808000,#ffb6c1" SpecificValues="" ManualTiles="" NoneSpecificValuesAction="Color" UpperCutoffIncludedExcluded="Excluded" />
+              <LabelStyle Disabled="false" />
+            </Layer>
+          </Layers>
+          <Legend>
+            <LegendStyle Position="Right" UseCommaSeparators="false" />
+          </Legend>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxReportMap" />
+    </Node>
+    <Node ToolID="31">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+        <Position x="1398" y="330" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <OrderChanged value="False" />
+          <CommaDecimal value="False" />
+          <SelectFields>
+            <SelectField field="Centroid" selected="True" />
+            <SelectField field="*Unknown" selected="False" />
+          </SelectFields>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+    </Node>
+    <Node ToolID="32">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.BrowseV2.BrowseV2">
+        <Position x="1602" y="330" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <TempFile>C:\Users\JOSE~1.ARM\AppData\Local\Temp\Engine_13592_d9820ee0b60a4686aa86da556ac00e22_\Engine_12924_ab9b16bbbfea475fa06a0ed748568c6c_.yxdb</TempFile>
+          <TempFileDataProfiling />
+          <Layout>
+            <ViewMode>Single</ViewMode>
+            <ViewSize value="100" />
+            <View1>
+              <DefaultTab>Report</DefaultTab>
+              <Hints>
+                <Map>
+                  <BaseMap>[No Base Map]</BaseMap>
+                </Map>
+                <Table />
+              </Hints>
+            </View1>
+            <View2 />
+          </Layout>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxBrowseV2" />
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="1" Connection="Output" />
+      <Destination ToolID="4" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="4" Connection="Output" />
+      <Destination ToolID="5" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="5" Connection="False" />
+      <Destination ToolID="7" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="5" Connection="True" />
+      <Destination ToolID="10" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="7" Connection="False" />
+      <Destination ToolID="8" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="7" Connection="True" />
+      <Destination ToolID="12" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="8" Connection="True" />
+      <Destination ToolID="14" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="10" Connection="Output" />
+      <Destination ToolID="11" Connection="Left" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="12" Connection="Output" />
+      <Destination ToolID="11" Connection="Right" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="11" Connection="Join" />
+      <Destination ToolID="13" Connection="Left" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="14" Connection="Output" />
+      <Destination ToolID="13" Connection="Right" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="13" Connection="Join" />
+      <Destination ToolID="17" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="17" Connection="Output" />
+      <Destination ToolID="18" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="18" Connection="Output" />
+      <Destination ToolID="20" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="20" Connection="Output" />
+      <Destination ToolID="23" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="23" Connection="Output" />
+      <Destination ToolID="24" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="24" Connection="Output" />
+      <Destination ToolID="25" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="25" Connection="Output" />
+      <Destination ToolID="28" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="25" Connection="Output" />
+      <Destination ToolID="31" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="28" Connection="Output" />
+      <Destination ToolID="29" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="30" Connection="Output" />
+      <Destination ToolID="32" Connection="Input" />
+    </Connection>
+    <Connection name="#1">
+      <Origin ToolID="31" Connection="Output" />
+      <Destination ToolID="30" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>Strava Export</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+  </Properties>
+</AlteryxDocument>

@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<AlteryxDocument yxmdVer="11.0">
+  <Nodes>
+    <Node ToolID="2">
+      <GuiSettings Plugin="AlteryxGuiToolkit.Questions.Tab.Tab">
+        <Position x="0" y="0" width="59" height="59" />
+      </GuiSettings>
+      <Properties>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+    </Node>
+    <Node ToolID="3">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MacroInput.MacroInput">
+        <Position x="102" y="186" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <UseFileInput value="False" />
+          <Name>Input3</Name>
+          <Abbrev />
+          <ShowFieldMap value="False" />
+          <Optional value="False" />
+          <TextInput>
+            <Configuration>
+              <NumRows value="6" />
+              <Fields>
+                <Field name="Number" />
+              </Fields>
+              <Data>
+                <r>
+                  <c>1</c>
+                </r>
+                <r>
+                  <c>2</c>
+                </r>
+                <r>
+                  <c>3</c>
+                </r>
+                <r>
+                  <c>4</c>
+                </r>
+                <r>
+                  <c>5</c>
+                </r>
+                <r>
+                  <c>10</c>
+                </r>
+              </Data>
+            </Configuration>
+          </TextInput>
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name>Text Input (1)</Name>
+          <DefaultAnnotationText />
+          <Left value="True" />
+        </Annotation>
+        <MetaInfo connection="Output">
+          <RecordInfo>
+            <Field name="Number" source="TextInput:" type="Byte" />
+          </RecordInfo>
+        </MetaInfo>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMacroInput" />
+    </Node>
+    <Node ToolID="9">
+      <GuiSettings Plugin="AlteryxBasePluginsGui.MacroOutput.MacroOutput">
+        <Position x="750" y="186" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Name>Output</Name>
+          <Abbrev />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxMacroOutput" />
+    </Node>
+  </Nodes>
+  <Connections />
+  <EncryptedData>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</EncryptedData>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <Constants>
+      <Constant>
+        <Namespace>Question</Namespace>
+        <Name>Macro Input (3)</Name>
+        <Value />
+        <IsNumeric value="False" />
+      </Constant>
+      <Constant>
+        <Namespace>Question</Namespace>
+        <Name>Macro Output (9)</Name>
+        <Value />
+        <IsNumeric value="False" />
+      </Constant>
+    </Constants>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>Factorial_Calculator_Encrypted_2</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+    <RuntimeProperties>
+      <Actions />
+      <Questions>
+        <Question>
+          <Type>Tab</Type>
+          <Description>Questions</Description>
+          <Name>Tab (2)</Name>
+          <ToolId value="2" />
+          <Questions>
+            <Question>
+              <Type>MacroInput</Type>
+              <Description>Macro Input (3)</Description>
+              <Name>Macro Input (3)</Name>
+              <ToolId value="3" />
+            </Question>
+            <Question>
+              <Type>MacroOutput</Type>
+              <Description>Macro Output (9)</Description>
+              <Name>Macro Output (9)</Name>
+              <ToolId value="9" />
+            </Question>
+          </Questions>
+        </Question>
+      </Questions>
+      <ModuleType>Macro</ModuleType>
+      <MacroCustomHelp value="False" />
+      <MacroDynamicOutputFields value="False" />
+      <MacroImage>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</MacroImage>
+      <MacroInputs />
+      <MacroOutputs />
+      <Wiz_CustomHelp value="False" />
+      <Wiz_CustomGraphic value="False" />
+      <Wiz_ShowOutput value="True" />
+      <Wiz_OpenOutputTools />
+      <Wiz_OutputMessage />
+      <Wiz_NoOutputFilesMessage />
+      <Wiz_ChainRunWizard />
+    </RuntimeProperties>
+  </Properties>
+</AlteryxDocument>
